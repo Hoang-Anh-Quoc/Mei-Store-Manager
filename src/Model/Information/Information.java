@@ -1,4 +1,4 @@
-package Module.Information;
+package Model.Information;
 
 public class Information {
 

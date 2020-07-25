@@ -1,4 +1,4 @@
-package Module.AccessDatabase;
+package Model.AccessDatabase;
 
 public interface PathFileInDatabase {
     // Admin

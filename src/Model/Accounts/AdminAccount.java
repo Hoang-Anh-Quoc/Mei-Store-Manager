@@ -1,4 +1,4 @@
-package Module.Accounts;
+package Model.Accounts;
 
 public class AdminAccount extends Accounts{
 

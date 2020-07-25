@@ -1,4 +1,4 @@
-package Module.AccessDatabase;
+package Model.AccessDatabase;
 
 import java.io.FileWriter;
 import java.nio.file.Path;
