@@ -1,8 +1,18 @@
 package Views.Personnel;
 
+import Controller.PersonnelMenu.ControlPersonnelMenu;
+
 public class PersonnelMainMenu {
-    // Check Order
-    // Your Information
-    // Check goods
-    // Logout
+
+    public static void Menu(){
+        System.out.println("***************** Welcome to Mei Store *****************");
+        System.out.println("** (1) Check Order                                    **");        
+        System.out.println("** (2) Check Goods                                    **");        
+        System.out.println("** (3) Your Information                               **");
+        System.out.println("** (4) Logout                                         **");
+
+        ControlPersonnelMenu.SelectOption();        
+    }
+    
+
 }
