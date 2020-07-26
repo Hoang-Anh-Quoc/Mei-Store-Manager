@@ -1,4 +1,4 @@
-package Views;
+package Views.Main;
 
 import Controller.MainMenu.ControlMainMenu;
 

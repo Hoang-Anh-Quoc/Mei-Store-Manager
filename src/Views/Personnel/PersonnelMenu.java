@@ -2,7 +2,7 @@ package Views.Personnel;
 
 import Controller.PersonnelMenu.ControlPersonnelMenu;
 
-public class PersonnelMainMenu {
+public class PersonnelMenu {
 
     public static void Menu(){
         System.out.println("***************** Welcome to Mei Store *****************");

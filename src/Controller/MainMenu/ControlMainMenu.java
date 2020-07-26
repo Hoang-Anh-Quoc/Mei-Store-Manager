@@ -2,21 +2,27 @@ package Controller.MainMenu;
 
 import Controller.InputFromKeyboard.Input;
 
+import Views.Main.LoginMenu;
+
 public class ControlMainMenu {
 
     public static void SelectOption(){
-        int yourChoose = Input.NumberOfChoose(3);
+        int UserChoose = Input.InputUserChoose(3);
         
-        switch(yourChoose){
-            case 1 :
+        switch(UserChoose){
+            case 1 : // Login
+                LoginMenu.Menu();
+                Login.LoginForm();
                 break;
-            case 2 :
+            case 2 : // Sign up
+
                 break;
-            case 3 :
+            case 3 : // Forgot password
+
                 break;
             default :
+
         }
-        
     }
 
 }
