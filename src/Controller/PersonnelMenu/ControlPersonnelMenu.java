@@ -1,11 +1,11 @@
 package Controller.PersonnelMenu;
 
-import Controller.InputFromKeyboard.Input;
+import Controller.InputFromKeyboard.InputData;
 
 public class ControlPersonnelMenu {
 
     public static void SelectOption(){
-        int UserChoose = Input.InputUserChoose(3);
+        int UserChoose = InputData.InputUserChoose(3);
         
         switch(UserChoose){
             case 1 :

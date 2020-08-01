@@ -1,11 +1,11 @@
 package Controller.AdminMenu;
 
-import Controller.InputFromKeyboard.Input;
+import Controller.InputFromKeyboard.InputData;
 
 public class ControlAdminMenu {
     
     public static void SelectOption(){
-        int yourChoose = Input.InputUserChoose(3);
+        int yourChoose = InputData.InputUserChoose(3);
         
         switch(yourChoose){
             case 1 :

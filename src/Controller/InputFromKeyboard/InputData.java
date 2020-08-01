@@ -1,6 +1,6 @@
 package Controller.InputFromKeyboard;
 
-public class Input implements LibraryInputData, InputException, NotificationInput{
+public class InputData implements LibraryInputData, InputException, NotificationInput{
     
     public static int InputUserChoose(int NumberOfOptions) {
         System.out.print(inputChooseNotify);
@@ -23,7 +23,7 @@ public class Input implements LibraryInputData, InputException, NotificationInpu
         System.out.print(inputUserName);
         String UserName = sc.nextLine();
         if(CheckStringAllIsNumber(UserName)){
-            if(UserName.length() == 11){
+            if(UserName.length() == 10) {
                 return UserName;
             } else {
                 System.out.println(eLengthMobilNumber);
@@ -80,4 +80,16 @@ public class Input implements LibraryInputData, InputException, NotificationInpu
         }
         return true;
     }
+
+    
+    public static String CutStringFrom(String StringNeedCut, int Start) {
+        // Datatype is "|...|...|" so start is number of "|"
+        int count = 0;
+        while (count != Start) {
+            StringNeedCut = StringNeedCut.substring(StringNeedCut.indexOf("|") + 1);
+            ++count;
+        }
+        return StringNeedCut.substring(0, StringNeedCut.indexOf("|"));
+    }
+
 }

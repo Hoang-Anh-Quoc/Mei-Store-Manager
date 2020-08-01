@@ -9,7 +9,7 @@ public interface PathFileInDatabase {
     public final String PathListIDOfGoods = "Database\\Goods\\List Of Goods\\ListIDOfGoods.txt";
 
     public final String PathOrderBeingTransported = "Database\\Goods\\Orders\\BeingTransported.txt";
-    public final String PathDeliveryHistory = "Database\\Goods\\Orders\\DeliveryHistory.txt";
+    public final String PathDeliveryHistory = "Database\\Goods\\Orders\\ListOrders.txt";
     public final String PathOrderForm = "Database\\Goods\\Orders\\OrderForm.txt";
     public final String PathPreparingToDelivery = "Database\\Goods\\Orders\\PreparingToDelivery.txt";
 

@@ -1,21 +1,20 @@
 package Controller.MainMenu;
 
-import Controller.InputFromKeyboard.Input;
+import Controller.InputFromKeyboard.InputData;
 
 import Views.Main.LoginMenu;
 
 public class ControlMainMenu {
 
     public static void SelectOption(){
-        int UserChoose = Input.InputUserChoose(3);
+        int UserChoose = InputData.InputUserChoose(3);
         
         switch(UserChoose){
-            case 1 : // Login
-                LoginMenu.Menu();
-                Login.LoginForm();
+            case 1 :
+                LoginMenu.Menu();                
                 break;
-            case 2 : // Sign up
-
+            case 2 : 
+                SignUp.ControlSignUp();
                 break;
             case 3 : // Forgot password
 

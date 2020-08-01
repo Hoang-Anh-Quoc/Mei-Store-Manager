@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class AccessData {
 
     public static ArrayList<String> getData(String PathFile) {
@@ -29,5 +30,20 @@ public class AccessData {
         } catch (Exception e){
             System.out.println(e.toString());
         }
+    }
+
+    public static void getUserAccount(){
+        DataProcessing.UsersAccount.clear();
+        DataProcessing.UsersAccount.addAll(getData(PathFileInDatabase.PathUsersAccounts));
+    }
+
+    public static void getPersonnelAccount(){
+        DataProcessing.PersonnelAccounts.clear();
+        DataProcessing.PersonnelAccounts.addAll(getData(PathFileInDatabase.PathPersonnelAccounts));
+    }
+
+    public static void getAdminAccount(){
+        DataProcessing.AdminsAccounts.clear();
+        DataProcessing.AdminsAccounts.addAll(getData(PathFileInDatabase.PathAdminsAccounts));
     }
 }
