@@ -9,22 +9,23 @@ public class mainTest {
         String Password = "1234567";
         System.out.print(LoginWithAdmin(UserName, Password));
     }
-    private static boolean LoginWithAdmin(String UserName , String Password){
-        AccessData.getAdminAccount();                
 
-        for(String AdminAccount : DataProcessing.AdminsAccounts){
+    private static boolean LoginWithAdmin(String UserName, String Password) {
+        AccessData.getAdminAccount();
+
+        for (String AdminAccount : DataProcessing.AdminsAccounts) {
             // System.out.println(AdminAccount);
             // System.out.println(InputData.CutStringFrom(AdminAccount, 2));
             // System.out.println(InputData.CutStringFrom(AdminAccount, 3));
-            if(InputData.CutStringFrom(AdminAccount, 2).equals(UserName)) {
-                if(InputData.CutStringFrom(AdminAccount, 3).equals(Password)){
+            if (InputData.CutStringFrom(AdminAccount, 2).equals(UserName)) {
+                if (InputData.CutStringFrom(AdminAccount, 3).equals(Password)) {
                     System.out.println("Success!");
                     return true;
                 } else {
                     System.out.println("Not Success!");
                 }
             }
-        }        
+        }
         return false;
     }
 }

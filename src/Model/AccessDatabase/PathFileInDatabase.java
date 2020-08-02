@@ -15,6 +15,7 @@ public interface PathFileInDatabase {
 
     // Personnel
     public final String PathPersonnelAccounts = "Database\\Personnel\\Accounts.txt";
+    public final String PathPersonnelAccountsNeedAccept = "Database\\Personnel\\AccountsNeedAccept.txt";
     public final String PathPersonnelInformation = "Database\\Personnel\\Information.txt";
 
     // Users

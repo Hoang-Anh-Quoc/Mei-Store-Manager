@@ -1,7 +1,9 @@
 package Model.Accounts;
 
-public class UserAccount extends Accounts{
-    public UserAccount(){
+public class UserAccount extends Accounts {
 
+    public UserAccount() {
+        super();
     }
+
 }

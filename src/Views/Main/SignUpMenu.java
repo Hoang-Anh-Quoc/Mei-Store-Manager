@@ -3,7 +3,7 @@ package Views.Main;
 import Controller.MainMenu.SignUp;
 
 public class SignUpMenu {
-    public static void Menu(){
+    public static void Menu() {
         System.out.println("***************** Welcome to Mei Store *****************");
         System.out.println("** What account do you want to create ?               **");
         System.out.println("** (1) Users Account                                  **");
