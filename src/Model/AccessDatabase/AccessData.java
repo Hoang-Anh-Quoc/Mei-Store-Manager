@@ -24,7 +24,7 @@ public class AccessData {
     private static void setData(final ArrayList<String> listData, final String PathFile) {
         try (FileWriter frFile = new FileWriter(PathFile)) {
             for (final String data : listData) {
-                frFile.write(data);
+                frFile.write(data + "\n");            
             }
         } catch (final Exception e) {
             System.out.println(e.toString());
@@ -33,38 +33,64 @@ public class AccessData {
 
     public static void getUserAccount() {
         DataProcessing.UsersAccount.clear();
-        DataProcessing.UsersAccount.addAll(getData(PathFileInDatabase.PathUsersAccounts));
+        DataProcessing.UsersAccount.addAll(getData(PathFile.PathUsersAccounts));
     }
 
     public static void setUserAccountToDatabase() {
-        setData(DataProcessing.UsersAccount, PathFileInDatabase.PathUsersAccounts);
+        setData(DataProcessing.UsersAccount, PathFile.PathUsersAccounts);
     }
 
     public static void getPersonnelAccount() {
         DataProcessing.PersonnelAccounts.clear();
-        DataProcessing.PersonnelAccounts.addAll(getData(PathFileInDatabase.PathPersonnelAccounts));
+        DataProcessing.PersonnelAccounts.addAll(getData(PathFile.PathPersonnelAccounts));
     }
 
     public static void setPersonnelAccountToDatabase() {
-        setData(DataProcessing.PersonnelAccounts, PathFileInDatabase.PathPersonnelAccounts);
+        setData(DataProcessing.PersonnelAccounts, PathFile.PathPersonnelAccounts);
     }
 
     public static void getAdminAccount() {
         DataProcessing.AdminsAccounts.clear();
-        DataProcessing.AdminsAccounts.addAll(getData(PathFileInDatabase.PathAdminsAccounts));
+        DataProcessing.AdminsAccounts.addAll(getData(PathFile.PathAdminsAccounts));
     }
 
     public static void setAdminAccountToDatabase() {
-        setData(DataProcessing.AdminsAccounts, PathFileInDatabase.PathAdminsAccounts);
+        setData(DataProcessing.AdminsAccounts, PathFile.PathAdminsAccounts);
     }
 
     public static void getAccountID() {
         DataProcessing.AllAccountsID.clear();
-        DataProcessing.AllAccountsID.addAll(getData(PathFileInDatabase.PathAllAccountsID));
+        DataProcessing.AllAccountsID.addAll(getData(PathFile.PathAllAccountsID));
     }
 
     public static void setAccountIDToDatabase() {
-        setData(DataProcessing.AllAccountsID, PathFileInDatabase.PathAllAccountsID);
+        setData(DataProcessing.AllAccountsID, PathFile.PathAllAccountsID);
     }
 
+    public static void getUserInformation(){
+        DataProcessing.UserInformation.clear();
+        DataProcessing.UserInformation.addAll(getData(PathFile.PathUsersInformation));
+    }
+
+    public static void setUserInformationToDatabase(){
+        setData(DataProcessing.UserInformation, PathFile.PathUsersInformation);
+    }
+
+    public static void getPersonnelInformation(){
+        DataProcessing.PersonnelInformation.clear();
+        DataProcessing.PersonnelInformation.addAll(getData(PathFile.PathPersonnelInformation));
+    }
+
+    public static void setPersonnelInformationToDatabase(){
+        setData(DataProcessing.PersonnelInformation, PathFile.PathPersonnelInformation);
+    }
+
+    public static void getAdminInformation(){
+        DataProcessing.AdminInformation.clear();
+        DataProcessing.AdminInformation.addAll(getData(PathFile.PathAdminsInformation));
+    }
+
+    public static void setAdminInformationToDatabase(){
+        setData(DataProcessing.AdminInformation, PathFile.PathAdminsInformation);
+    }
 }

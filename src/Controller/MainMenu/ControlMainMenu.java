@@ -3,6 +3,7 @@ package Controller.MainMenu;
 import Controller.InputFromKeyboard.InputData;
 
 import Views.Main.LoginMenu;
+import Views.Main.SignUpMenu;
 
 public class ControlMainMenu {
 
@@ -14,13 +15,11 @@ public class ControlMainMenu {
                 LoginMenu.Menu();
                 break;
             case 2:
-                SignUp.ControlSignUp();
+                SignUpMenu.Menu();
                 break;
-            case 3: // Forgot password
-
+            case 3:
+                ForgotPassword.resetPassword();
                 break;
-            default:
-
         }
     }
 

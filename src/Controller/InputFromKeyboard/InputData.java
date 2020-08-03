@@ -1,6 +1,11 @@
 package Controller.InputFromKeyboard;
 
-public class InputData implements LibraryInputData, InputException, NotificationInput {
+import Model.AccessDatabase.AccessData;
+import Model.AccessDatabase.DataProcessing;
+import Views.ProgramLog;
+import Views.ProgramLogException;
+
+public class InputData implements LibraryInputData, ProgramLogException, ProgramLog {
 
     public static int InputUserChoose(int NumberOfOptions) {
         System.out.print(inputChooseNotify);
@@ -8,13 +13,16 @@ public class InputData implements LibraryInputData, InputException, Notification
         try {
             int numberOfChoose = Integer.parseInt(yourChoose);
             if (numberOfChoose < 0 || numberOfChoose > NumberOfOptions) {
-                System.out.println(eUserChooseLength);
+                System.out.println(eUserChooseLength + "\n");                                
                 return InputUserChoose(NumberOfOptions);
             }
+
+            System.out.println("");            
             return numberOfChoose;
         } catch (NumberFormatException e) {
             System.out.println(eUserChooseNotNumber);
         }
+        System.out.println("");        
         return InputUserChoose(NumberOfOptions);
     }
 
@@ -39,7 +47,7 @@ public class InputData implements LibraryInputData, InputException, Notification
     public static String InputPassword() {
         System.out.print(inputPassword);
         String Password = sc.nextLine();
-        if (CheckStringIsOnlyNumberAndLetter(Password)) {
+        if (CheckStringIsNumberAndLetter(Password)) {
             if (Password.length() >= 6 && Password.length() <= 12) {
                 return Password;
             } else {
@@ -53,6 +61,8 @@ public class InputData implements LibraryInputData, InputException, Notification
     }
 
     public static String InputSecurityQuestion() {
+
+        System.out.println(SecurityQuestion);
         System.out.println("(1)" + SecurityQuestion1);
         System.out.println("(2)" + SecurityQuestion2);
         System.out.println("(3)" + SecurityQuestion3);
@@ -85,9 +95,59 @@ public class InputData implements LibraryInputData, InputException, Notification
         if (CheckStringAllIsNumber(AdminCode)) {
             return AdminCode;
         } else {
-            System.out.println();
+            System.out.println(eAdminCode);
             return InputAdminCode();
         }
+    }
+    
+    public static String InputInfoName(){
+        System.out.print(inputInfoName);
+        String name = sc.nextLine();
+        if(CheckStringAllIsLetter(name)){
+            return name;
+        } else {
+            System.out.println(eInputInfoName);
+            return InputInfoName();
+        }
+    }
+
+    public static String InputInfoAge(){
+        System.out.print(inputInfoAge);
+        String age = sc.nextLine();
+        if(CheckStringAllIsNumber(age)){
+            return age;
+        } else {
+            System.out.println(eInputInfoAge);
+            return InputInfoAge();
+        }
+    }
+
+    public static String InputInfoAddress(){
+        System.out.print(inputInfoAddress);
+        String address = sc.nextLine();
+        if(CheckAddress(address)){
+            return address;
+        } else {
+            System.out.println(eInputInfoAddress);
+            return InputInfoAddress();
+        }
+    }
+
+    public static boolean ContinueOrExit(){
+       System.out.println(ContinueOrExitMenu);
+        switch (InputUserChoose(2)) {
+            case 1:
+                return true;                
+            case 2:
+                return false;
+        }
+        return false;
+    }
+
+    public static boolean CheckAddress(String address){
+        address = address.replaceAll(" ", "");
+        address = address.replaceAll("-", "");        
+        return CheckStringIsNumberAndLetter(address);
     }
 
     public static boolean CheckStringAllIsLetter(String StringNeedCheck) {
@@ -109,13 +169,36 @@ public class InputData implements LibraryInputData, InputException, Notification
         return true;
     }
 
-    public static boolean CheckStringIsOnlyNumberAndLetter(String StringNeedCheck) {
-        String StringForm = "qwertyuioplkjhgfdsazxcvbnm0123456789";
+    public static boolean CheckStringIsNumberAndLetter(String StringNeedCheck) {
+        String StringForm = "qwertyuioplkjhgfdsazxcvbnm0123456789QWERTYUIOPLKJHGFDSAZXCVBNM";
         for (int i = 0; i < StringNeedCheck.length(); ++i) {
             if (!StringForm.contains(String.valueOf(StringNeedCheck.charAt(i)))) {
                 return false;
             }
         }
+        return true;
+    }
+    
+    public static boolean CheckUserNameIsOnly(String Username){        
+        AccessData.getUserAccount();
+        AccessData.getPersonnelAccount();
+        AccessData.getAdminAccount();
+        for(String account : DataProcessing.UsersAccount){
+            if(InputData.CutStringFrom(account, 2).equals(Username)){
+                return false;
+            }
+        }
+        for(String account : DataProcessing.PersonnelAccounts){
+            if(InputData.CutStringFrom(account, 2).equals(Username)){
+                return false;
+            }
+        }
+        for(String account : DataProcessing.AdminsAccounts){
+            if(InputData.CutStringFrom(account, 2).equals(Username)){
+                return false;
+            }
+        }
+
         return true;
     }
 

@@ -2,9 +2,12 @@ package Controller.MainMenu;
 
 import Controller.InputFromKeyboard.InputData;
 import Model.AccessDatabase.*;
+import Model.Accounts.AdminAccount;
+import Model.Accounts.PersonnelAccount;
 import Views.Users.UserMenu;
+import Views.ProgramLog;
+import Views.ProgramLogException;
 import Views.Admins.AdminMenu;
-import Views.Main.LoginNotSuccessMenu;
 import Views.Personnel.PersonnelMenu;
 
 public class Login {
@@ -16,7 +19,7 @@ public class Login {
         if (!LoginWithUser(UserName, Password)) {
             if (!LoginWithPersonnel(UserName, Password)) {
                 if (!LoginWithAdmin(UserName, Password)) {
-                    LoginNotSuccess();
+                    LoginNotSuccess(ProgramLog.LoginNotSuccess);
                 }
             }
         }
@@ -30,7 +33,7 @@ public class Login {
                     UserMenu.Menu();
                     return true;
                 } else {
-                    LoginNotSuccess();
+                    LoginNotSuccess(ProgramLog.LoginNotSuccess);
                     return true;
                 }
             }
@@ -40,13 +43,19 @@ public class Login {
 
     private static boolean LoginWithPersonnel(String UserName, String Password) {
         AccessData.getPersonnelAccount();
-        for (String PersonnelAccount : DataProcessing.PersonnelAccounts) {
-            if (InputData.CutStringFrom(PersonnelAccount, 2).equals(UserName)) {
-                if (InputData.CutStringFrom(PersonnelAccount, 3).equals(Password)) {
-                    PersonnelMenu.Menu();
-                    return true;
+        for (String account : DataProcessing.PersonnelAccounts) {
+            PersonnelAccount personnelAccount = new PersonnelAccount(account);
+            if (personnelAccount.getUsername().equals(UserName)) {
+                if (personnelAccount.getPassword().equals(Password)) {                    
+                    if(personnelAccount.getAccountActivated()){
+                        PersonnelMenu.Menu();
+                        return true;
+                    } else {
+                        LoginNotSuccess(ProgramLogException.eAccountNotActivated);
+                        return true;                        
+                    }                    
                 } else {
-                    LoginNotSuccess();
+                    LoginNotSuccess(ProgramLog.LoginNotSuccess);
                     return true;
                 }
             }
@@ -56,13 +65,14 @@ public class Login {
 
     private static boolean LoginWithAdmin(String UserName, String Password) {
         AccessData.getAdminAccount();
-        for (String AdminAccount : DataProcessing.AdminsAccounts) {
-            if (InputData.CutStringFrom(AdminAccount, 2).equals(UserName)) {
-                if (InputData.CutStringFrom(AdminAccount, 3).equals(Password)) {
+        for (String account : DataProcessing.AdminsAccounts) {
+            AdminAccount adminAccount = new AdminAccount(account); 
+            if (adminAccount.getUsername().equals(UserName)) {
+                if (adminAccount.getPassword().equals(Password)) {
                     AdminMenu.Menu();
                     return true;
                 } else {
-                    LoginNotSuccess();
+                    LoginNotSuccess(ProgramLog.LoginNotSuccess);
                     return true;
                 }
             }
@@ -70,16 +80,10 @@ public class Login {
         return false;
     }
 
-    private static void LoginNotSuccess() {
-
-        int Userchoose = LoginNotSuccessMenu.Menu();
-
-        switch (Userchoose) {
-            case 1:
-                LoginForm();
-                break;
-            case 2:
-                break;
+    private static void LoginNotSuccess(String excption) {
+        System.out.println(excption);
+        if(InputData.ContinueOrExit()){
+            LoginForm();
         }
     }
 }

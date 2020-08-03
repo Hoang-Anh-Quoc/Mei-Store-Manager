@@ -6,4 +6,7 @@ public class UserAccount extends Accounts {
         super();
     }
 
+    public UserAccount(String newAccount){
+        super(newAccount);
+    }
 }

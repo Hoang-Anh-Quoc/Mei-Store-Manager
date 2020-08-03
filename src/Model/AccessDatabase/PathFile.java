@@ -1,6 +1,6 @@
 package Model.AccessDatabase;
 
-public interface PathFileInDatabase {
+public interface PathFile {
     // Admin
     public final String PathAdminsAccounts = "Database\\Admins\\Accounts.txt";
     public final String PathAdminsInformation = "Database\\Admins\\Information.txt";
@@ -14,8 +14,7 @@ public interface PathFileInDatabase {
     public final String PathPreparingToDelivery = "Database\\Goods\\Orders\\PreparingToDelivery.txt";
 
     // Personnel
-    public final String PathPersonnelAccounts = "Database\\Personnel\\Accounts.txt";
-    public final String PathPersonnelAccountsNeedAccept = "Database\\Personnel\\AccountsNeedAccept.txt";
+    public final String PathPersonnelAccounts = "Database\\Personnel\\Accounts.txt";    
     public final String PathPersonnelInformation = "Database\\Personnel\\Information.txt";
 
     // Users
