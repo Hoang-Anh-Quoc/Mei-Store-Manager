@@ -17,7 +17,7 @@ public interface ProgramLog {
 
     String LoginNotSuccess = "\nUsername or password incorrect!";    
 
-    String ContinueOrExitMenu = "\nDo you want continue? \n (1) Yes \n (2) Exit";
+    String ContinueOrExitMenu = "Do you want continue? \n (1) Yes \n (2) Exit";
     
     String CreateAccountSuccess = "\nCreate account success! Import your information.";
     String CreatePersonnelAccountSuccess = "\nCreate account success! Please wait for admin accept.";
@@ -25,4 +25,8 @@ public interface ProgramLog {
     String inputInfoName = "Name: ";
     String inputInfoAge = "Age: ";
     String inputInfoAddress = "Address: ";
+
+    String inputNameItem = "Name Item: ";
+    String inputAmountItem = "Amount Item: ";
+    String inputPriceItem = "Item Price: ";
 }

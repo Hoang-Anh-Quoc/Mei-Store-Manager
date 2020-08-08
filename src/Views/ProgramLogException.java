@@ -18,5 +18,10 @@ public interface ProgramLogException {
     String eInputInfoAddress = "Please enter your real address!";
 
     String eAnswerNotCorrect = "The answer is not correct!";
-    String eAccountNotFound = "Username not found!";;
+    String eAccountNotFound = "Username not found!";
+
+    String eNameItemNotCorrect = "The name of item is string and number! Please import again.";
+    String eAmountItemNotCorrect = "The amount of item is only number! Please import again.";
+    String ePriceItemNotCorrect = "The item price is only number! Please import again.";
+
 }

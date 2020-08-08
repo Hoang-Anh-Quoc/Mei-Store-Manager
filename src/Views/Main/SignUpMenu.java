@@ -1,6 +1,6 @@
 package Views.Main;
 
-import Controller.MainMenu.SignUp;
+import Controllers.MainMenu.SignUp;
 
 public class SignUpMenu {
     public static void Menu() {
@@ -9,8 +9,8 @@ public class SignUpMenu {
         System.out.println("** (1) Users Account                                  **");
         System.out.println("** (2) Personnel Account                              **");
         System.out.println("** (3) Admin Account                                  **");
-        System.out.println("** Select (4) to exit!                                **");
+        System.out.println("** (4) Back                                           **");
 
-        SignUp.ControlSignUp();
+        SignUp.ControlSignUp(4);
     }
 }

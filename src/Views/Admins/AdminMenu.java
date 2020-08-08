@@ -1,16 +1,18 @@
 package Views.Admins;
 
-import Controller.AdminMenu.ControlAdminMenu;
+import Controllers.AdminMenu.ControlAdminMenu;
 
 public class AdminMenu {
 
     public static void Menu() {
-        System.out.println("\n***************** Welcome to Mei Store *****************");
-        System.out.println("** (1) Check Goods                                    **");
-        System.out.println("** (2) Check Personnel                                **");
-        System.out.println("** (3) Your Information                               **");
-        System.out.println("** (4) Logout                                         **");
 
-        ControlAdminMenu.SelectOption();
+        do {
+           System.out.println("\n***************** Welcome to Mei Store *****************");
+           System.out.println("** (1) Goods Manager                                    **");
+           System.out.println("** (2) Personnel Manager                                **");
+           System.out.println("** (3) Your Information                                 **");
+           System.out.println("** (4) Logout                                           **");
+       } while (ControlAdminMenu.SelectOption(4));
+
     }
 }
