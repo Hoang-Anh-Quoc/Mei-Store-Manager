@@ -52,6 +52,10 @@ public class Item {
         this.Amount = InputData.CutStringFrom(item,3);
     }
 
+    public void setAmount(int amount){
+        this.Amount = String.valueOf(amount);
+    }
+
     private void setPrice() {
         this.Price = InputData.InputPriceItem();
     }

@@ -99,8 +99,17 @@ public class AccessData {
         DataProcessing.AllOrder.addAll(getData(PathFile.PathOrder));
     }
 
+    public static void setAllOrderToDatabase(){
+        setData(DataProcessing.AllOrder, PathFile.PathOrder);
+    }
+
     public static void getAllItem(){
         DataProcessing.AllItem.clear();
         DataProcessing.AllItem.addAll(getData(PathFile.PathItem));
     }
+
+    public static void setAllItem(){
+        setData(DataProcessing.AllItem, PathFile.PathItem);
+    }
+
 }

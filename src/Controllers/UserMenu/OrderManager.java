@@ -3,6 +3,7 @@ package Controllers.UserMenu;
 import Models.AccessDatabase.AccessData;
 import Models.AccessDatabase.DataProcessing;
 import Models.Goods.Item;
+import Models.Goods.Order;
 
 
 public class OrderManager {
@@ -16,12 +17,23 @@ public class OrderManager {
         }
     }
 
-    public static void MakeOrder(){
-        printAllItem();
-        AccessData.getAllOrder();
-
+    public static void MakeOrder(String IDUser) {
+        printAllItem();        
+        Order newOrder = new Order(Integer.parseInt(IDUser));
+        DataProcessing.AllOrder.add(newOrder.toString());
+        AccessData.setAllOrderToDatabase();
     }
-    public static void YourOrder(){
+
+    public static void YourOrder(String IDUser){
+       
+        AccessData.getAllOrder();
+        for(String orderInList : DataProcessing.AllOrder){
+            Order newOrder = new Order(orderInList);
+            if(IDUser.equals(newOrder.getIDUser())){
+
+            }
+        }
+
         
     }
 }

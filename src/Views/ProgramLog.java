@@ -26,7 +26,10 @@ public interface ProgramLog {
     String inputInfoAge = "Age: ";
     String inputInfoAddress = "Address: ";
 
+    String inputIDItem = "ID Item : ";
     String inputNameItem = "Name Item: ";
     String inputAmountItem = "Amount Item: ";
     String inputPriceItem = "Item Price: ";
+
+    String BuyItemSuccess = "Buy item success!";
 }

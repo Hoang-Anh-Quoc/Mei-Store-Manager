@@ -4,15 +4,15 @@ import Controllers.InputFromKeyboard.InputData;
 
 public class ControlUserMenu {
 
-    public static boolean SelectOption(int option) {
+    public static boolean SelectOption(int option , String IDUSer) {
         int UserInput = InputData.InputUserChoose(option);
 
         switch (UserInput) {
             case 1: 
-                OrderManager.MakeOrder();
+                OrderManager.MakeOrder(IDUSer);
                 break;
             case 2: 
-                OrderManager.YourOrder();
+                OrderManager.YourOrder(IDUSer);
                 break;
             case 3: // Your Information
 

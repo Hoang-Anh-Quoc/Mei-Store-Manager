@@ -5,6 +5,6 @@ import Controllers.UserMenu.OrderManager;
 
 public class MainTest {
     public static void main(String[] args) throws IOException {
-        OrderManager.MakeOrder();
+        OrderManager.MakeOrder("");
     }
 }

@@ -30,7 +30,7 @@ public class Login {
         for (String UserAccount : DataProcessing.UsersAccount) {
             if (InputData.CutStringFrom(UserAccount, 2).equals(UserName)) {
                 if (InputData.CutStringFrom(UserAccount, 3).equals(Password)) {
-                    UserMenu.Menu();
+                    UserMenu.Menu(InputData.CutStringFrom(UserAccount, 1));
                 } else {
                     LoginNotSuccess(ProgramLog.LoginNotSuccess);
                 }

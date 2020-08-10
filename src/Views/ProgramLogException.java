@@ -20,8 +20,11 @@ public interface ProgramLogException {
     String eAnswerNotCorrect = "The answer is not correct!";
     String eAccountNotFound = "Username not found!";
 
+    String eIDItemNotFound = "The ID Item not found!";    
     String eNameItemNotCorrect = "The name of item is string and number! Please import again.";
     String eAmountItemNotCorrect = "The amount of item is only number! Please import again.";
-    String ePriceItemNotCorrect = "The item price is only number! Please import again.";
+    String ePriceItemNotCorrect = "The item price is only number! Please import again.";        
+    String eAmountItemTooMuch = "You buy too much.Please reduce the amount!";
 
+    String eBuyItemNotSuccess = "Buy item not Success!";
 }

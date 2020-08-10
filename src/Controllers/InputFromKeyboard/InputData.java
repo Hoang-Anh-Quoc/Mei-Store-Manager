@@ -134,6 +134,10 @@ public class InputData implements LibraryInputData, ProgramLogException, Program
     }
 
 
+    public static String InputIDItemForUser(){
+        System.out.print(inputIDItem);
+        return sc.nextLine();        
+    }
 
     public static String InputNameItem(){
         System.out.print(inputNameItem);
