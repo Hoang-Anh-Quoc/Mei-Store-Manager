@@ -9,7 +9,7 @@ import Views.ProgramLogException;
 import java.util.ArrayList;
 
 public class Order {
-    // Kiểm hàng
+    
     private String IDOrder;
     private String IDUser;
     private String Status = "";
@@ -58,14 +58,14 @@ public class Order {
     }
 
     public String toString() {
-        String listItem = "";
+        StringBuilder listItem = new StringBuilder();
         for(String item : order){
-            listItem += item;
+            listItem.append(item);
         }        
         return "|" + getIDOrder() + "|" + IDUser + "|" + listItem;
     }
 
     public void printOrder(){
-
+        
     }
 }

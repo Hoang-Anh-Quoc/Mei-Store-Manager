@@ -85,7 +85,7 @@ public class Item {
     }
 
     public void printItemForUser() {
-
+        //"%1$-8s%2$-15s%3$-13s%4$-20s\n" - This is format line when print
         if(Integer.parseInt(getAmount()) > 0){
             System.out.printf("%1$-8s%2$-15s%3$-13s%4$-20s\n",getID(),getName(),"Stoking",getPrice());
         } else {

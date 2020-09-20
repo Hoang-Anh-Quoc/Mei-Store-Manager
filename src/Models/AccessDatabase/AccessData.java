@@ -17,7 +17,6 @@ public class AccessData {
         } catch (final Exception e) {
             System.out.println(e.toString());
         }
-
         return ListAccount;
     }
 
@@ -35,7 +34,6 @@ public class AccessData {
         DataProcessing.UsersAccount.clear();
         DataProcessing.UsersAccount.addAll(getData(PathFile.PathUsersAccounts));
     }
-
     public static void setUserAccountToDatabase() {
         setData(DataProcessing.UsersAccount, PathFile.PathUsersAccounts);
     }

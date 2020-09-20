@@ -16,7 +16,7 @@ public class ItemUserBuy {
         setIDItem();
     }
 
-    public boolean SeachItem(String IDItem){
+    public boolean SearchItem(String IDItem){
         for(String StringItem : DataProcessing.AllItem){
             Item item = new Item(StringItem);
             if(item.getID().equals(IDItem)) {
@@ -30,7 +30,7 @@ public class ItemUserBuy {
 
     public void setIDItem() {
         String id = InputData.InputIDItemForUser();
-        if(SeachItem(id)){
+        if(SearchItem(id)){
             this.IDItem = id;            
         } else {            
             System.out.println(ProgramLogException.eIDItemNotFound);

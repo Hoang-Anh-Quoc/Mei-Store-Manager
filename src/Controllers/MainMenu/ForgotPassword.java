@@ -34,7 +34,7 @@ public class ForgotPassword {
             }
         }
         return false;
-    }
+    } 
 
     private static boolean setPasswordForPersonnelAccount(String UserName){
         AccessData.getPersonnelAccount();

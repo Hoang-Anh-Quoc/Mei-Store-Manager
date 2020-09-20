@@ -17,12 +17,12 @@ public class InputData implements LibraryInputData, ProgramLogException, Program
                 return InputUserChoose(NumberOfOptions);
             }
 
-            System.out.println("");
+            System.out.println();
             return numberOfChoose;
         } catch (NumberFormatException e) {
             System.out.println(eUserChooseNotNumber);
         }
-        System.out.println("");
+        System.out.println();
         return InputUserChoose(NumberOfOptions);
     }
 
@@ -205,7 +205,7 @@ public class InputData implements LibraryInputData, ProgramLogException, Program
     }
 
     public static boolean CheckStringAllIsNumber(String StringNeedCheck) {
-        String StringForm = "0123456789";
+        final String StringForm = "0123456789";
         for (int i = 0; i < StringNeedCheck.length(); ++i) {
             if (!StringForm.contains(String.valueOf(StringNeedCheck.charAt(i)))) {
                 return false;
@@ -215,7 +215,7 @@ public class InputData implements LibraryInputData, ProgramLogException, Program
     }
 
     public static boolean CheckStringIsNumberAndLetter(String StringNeedCheck) {
-        String StringForm = "qwertyuioplkjhgfdsazxcvbnm0123456789QWERTYUIOPLKJHGFDSAZXCVBNM";
+        final String StringForm = "qwertyuioplkjhgfdsazxcvbnm0123456789QWERTYUIOPLKJHGFDSAZXCVBNM";
         for (int i = 0; i < StringNeedCheck.length(); ++i) {
             if (!StringForm.contains(String.valueOf(StringNeedCheck.charAt(i)))) {
                 return false;
@@ -256,6 +256,5 @@ public class InputData implements LibraryInputData, ProgramLogException, Program
         }
         return StringNeedCut.substring(0, StringNeedCut.indexOf("|"));
     }
-
 
 }
