@@ -14,32 +14,40 @@ public class ItemUserBuy {
 
     public ItemUserBuy() {
         setIDItem();
+        setNameItem(SearchItemWithID(this.IDItem));
+        setAmountItem(SearchItemWithID(this.IDItem));
     }
 
-    public boolean SearchItem(String IDItem){
+    public ItemUserBuy(String item){
+        setNameItem(item);
+        setAmountItem(item);
+    }
+
+    public Item SearchItemWithID(String IDItem){
         for(String StringItem : DataProcessing.AllItem){
             Item item = new Item(StringItem);
             if(item.getID().equals(IDItem)) {
-                setNameItem(item.getName());
-                setAmountItem(item);
-                return true;
+                return item;
             }
         }
-        return false;
+        return null;
     }
 
     public void setIDItem() {
         String id = InputData.InputIDItemForUser();
-        if(SearchItem(id)){
-            this.IDItem = id;            
-        } else {            
+        this.IDItem = SearchItemWithID(id).getID();
+        if(this.IDItem == null) {
             System.out.println(ProgramLogException.eIDItemNotFound);
             Status = false;
         }
     }
 
-    public void setNameItem(String nameItem) {
-        this.NameItem = nameItem;
+    public void setNameItem(Item item) {
+        this.NameItem = item.getName();
+    }
+
+    public void setNameItem(String item){
+        this.NameItem = InputData.CutStringFrom(item,1);
     }
 
     public void setAmountItem(Item item) {        
@@ -53,6 +61,9 @@ public class ItemUserBuy {
             Status = false;
         }
     }
+    public void setAmountItem(String item){
+        this.AmountItem = InputData.CutStringFrom(item,2);
+    }
 
     public void upDateAmountItem(Item item , String amountItem){
         DataProcessing.AllItem.remove(item.toString());
@@ -61,9 +72,9 @@ public class ItemUserBuy {
         AccessData.setAllItem();
     }
 
-    public String getIDItem() {
-        return IDItem;
-    }
+//    public String getIDItem() {
+//        return IDItem;
+//    }
     public String getNameItem() {
         return NameItem;
     }
@@ -76,5 +87,9 @@ public class ItemUserBuy {
 
     public String toString(){
         return getNameItem() + "|" + getAmountItem() + "|";
+    }
+
+    public void printItemUserBuy(){
+        System.out.println(getNameItem() + "   " + getAmountItem());
     }
 }

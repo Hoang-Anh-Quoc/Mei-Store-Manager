@@ -249,10 +249,8 @@ public class InputData implements LibraryInputData, ProgramLogException, Program
 
     public static String CutStringFrom(String StringNeedCut, int Start) {
         // Datatype is "|...|...|" so start is number of "|"
-        int count = 0;
-        while (count != Start) {
+        for(int i = 0; i < Start ; ++i){
             StringNeedCut = StringNeedCut.substring(StringNeedCut.indexOf("|") + 1);
-            ++count;
         }
         return StringNeedCut.substring(0, StringNeedCut.indexOf("|"));
     }

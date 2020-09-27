@@ -18,22 +18,24 @@ public class OrderManager {
     }
 
     public static void MakeOrder(String IDUser) {
-        printAllItem();        
+        printAllItem();
         Order newOrder = new Order(Integer.parseInt(IDUser));
-        DataProcessing.AllOrder.add(newOrder.toString());
-        AccessData.setAllOrderToDatabase();
+        if(newOrder.CheckOrderSuccess()) {
+            DataProcessing.AllOrder.add(newOrder.toString());
+            AccessData.setAllOrderToDatabase();
+        }
     }
 
     public static void YourOrder(String IDUser){
        
         AccessData.getAllOrder();
-        for(String orderInList : DataProcessing.AllOrder){
-            Order newOrder = new Order(orderInList);
-            if(IDUser.equals(newOrder.getIDUser())){
 
+        for(String orderInList : DataProcessing.AllOrder){
+            Order OrderInDatabase = new Order(orderInList);
+            if(IDUser.equals(OrderInDatabase.getIDUser())){
+                OrderInDatabase.printOrder();
             }
         }
 
-        
     }
 }

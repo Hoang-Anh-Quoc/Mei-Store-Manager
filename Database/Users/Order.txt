@@ -1,2 +1,4 @@
 |0|0|0|0|
-|1|2|Quan jean|4|Tra Sua|5|
+|1|2|Tra Sua|2|
+|2|2|Quan jean|3|
+|3|2|Tra Sua|2|

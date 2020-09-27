@@ -1,6 +1,6 @@
-package Controller.AdminMenu;
+package Controllers.AdminMenu;
 
-import Controller.InputFromKeyboard.InputData;
+import Controllers.InputFromKeyboard.InputData;
 import Views.Admins.GoodsManagerMenu;
 import Views.Admins.PersonnelManagementMenu;
 
@@ -25,10 +25,10 @@ public class ControlAdminMenu {
         return true;
     }
 }
-package Controller.InputFromKeyboard;
+package Controllers.InputFromKeyboard;
 
-import Model.AccessDatabase.AccessData;
-import Model.AccessDatabase.DataProcessing;
+import Models.AccessDatabase.AccessData;
+import Models.AccessDatabase.DataProcessing;
 import Views.ProgramLog;
 import Views.ProgramLogException;
 
@@ -160,6 +160,51 @@ public class InputData implements LibraryInputData, ProgramLogException, Program
         }
     }
 
+
+    public static String InputIDItemForUser(){
+        System.out.print(inputIDItem);
+        return sc.nextLine();        
+    }
+
+    public static String InputNameItem(){
+        System.out.print(inputNameItem);
+        String nameItem = sc.nextLine();
+        if(CheckStringIsNumberAndLetter(nameItem)){
+            return nameItem;
+        } else {
+            System.out.println(eNameItemNotCorrect);
+            return InputNameItem();
+        }
+    }
+    public static String InputAmountItem(){
+        System.out.print(inputAmountItem);
+        String amountItem = sc.nextLine();
+        if(CheckStringAllIsNumber(amountItem)){
+            return amountItem;
+        } else {
+            System.out.println(eAmountItemNotCorrect);
+            return InputAmountItem();
+        }
+    }
+    public static String InputPriceItem(){
+        System.out.print(inputPriceItem);
+        String priceItem = sc.nextLine();
+        if(CheckPriceItem(priceItem)){
+            return priceItem;
+        } else {
+            System.out.println(ePriceItemNotCorrect);
+            return InputPriceItem();
+        }
+    }
+    private static boolean CheckPriceItem(String priceItem){
+        try{
+            Double.parseDouble(priceItem);
+            return true;
+        } catch (NumberFormatException e){
+            return false;
+        }
+    }
+
     public static boolean ContinueOrExit() {
         System.out.println(ContinueOrExitMenu);
         switch (InputUserChoose(2)) {
@@ -239,18 +284,18 @@ public class InputData implements LibraryInputData, ProgramLogException, Program
         return StringNeedCut.substring(0, StringNeedCut.indexOf("|"));
     }
 
+
 }
-package Controller.InputFromKeyboard;
+package Controllers.InputFromKeyboard;
 
 import java.util.Scanner;
 
 public interface LibraryInputData {
     Scanner sc = new Scanner(System.in);
 }
-package Controller.MainMenu;
+package Controllers.MainMenu;
 
-import Controller.InputFromKeyboard.InputData;
-
+import Controllers.InputFromKeyboard.InputData;
 import Views.Main.LoginMenu;
 import Views.Main.SignUpMenu;
 
@@ -275,14 +320,14 @@ public class ControlMainMenu {
         return true;
     }
 }
-package Controller.MainMenu;
+package Controllers.MainMenu;
 
-import Controller.InputFromKeyboard.InputData;
-import Model.AccessDatabase.AccessData;
-import Model.AccessDatabase.DataProcessing;
-import Model.Accounts.Accounts;
-import Model.Accounts.AdminAccount;
-import Model.Accounts.PersonnelAccount;
+import Controllers.InputFromKeyboard.InputData;
+import Models.AccessDatabase.AccessData;
+import Models.AccessDatabase.DataProcessing;
+import Models.Accounts.Accounts;
+import Models.Accounts.AdminAccount;
+import Models.Accounts.PersonnelAccount;
 import Views.ProgramLog;
 import Views.ProgramLogException;
 
@@ -367,12 +412,12 @@ public class ForgotPassword {
         return account.toString().replace(lastPassword,newPassword);
     }
 }
-package Controller.MainMenu;
+package Controllers.MainMenu;
 
-import Controller.InputFromKeyboard.InputData;
-import Model.AccessDatabase.*;
-import Model.Accounts.AdminAccount;
-import Model.Accounts.PersonnelAccount;
+import Controllers.InputFromKeyboard.InputData;
+import Models.AccessDatabase.*;
+import Models.Accounts.AdminAccount;
+import Models.Accounts.PersonnelAccount;
 import Views.Users.UserMenu;
 import Views.ProgramLog;
 import Views.ProgramLogException;
@@ -399,7 +444,7 @@ public class Login {
         for (String UserAccount : DataProcessing.UsersAccount) {
             if (InputData.CutStringFrom(UserAccount, 2).equals(UserName)) {
                 if (InputData.CutStringFrom(UserAccount, 3).equals(Password)) {
-                    UserMenu.Menu();
+                    UserMenu.Menu(InputData.CutStringFrom(UserAccount, 1));
                 } else {
                     LoginNotSuccess(ProgramLog.LoginNotSuccess);
                 }
@@ -452,15 +497,15 @@ public class Login {
         }
     }
 }
-package Controller.MainMenu;
+package Controllers.MainMenu;
 
-import Controller.InputFromKeyboard.InputData;
-import Model.AccessDatabase.AccessData;
-import Model.AccessDatabase.DataProcessing;
-import Model.Accounts.*;
-import Model.Information.AdminInformation;
-import Model.Information.PersonnelInformation;
-import Model.Information.UserInformation;
+import Controllers.InputFromKeyboard.InputData;
+import Models.AccessDatabase.AccessData;
+import Models.AccessDatabase.DataProcessing;
+import Models.Accounts.*;
+import Models.Information.AdminInformation;
+import Models.Information.PersonnelInformation;
+import Models.Information.UserInformation;
 import Views.ProgramLog;
 import Views.ProgramLogException;
 
@@ -540,9 +585,9 @@ public class SignUp {
     }
 
 }
-package Controller.PersonnelMenu;
+package Controllers.PersonnelMenu;
 
-import Controller.InputFromKeyboard.InputData;
+import Controllers.InputFromKeyboard.InputData;
 
 public class ControlPersonnelMenu {
 
@@ -565,24 +610,24 @@ public class ControlPersonnelMenu {
         return true;
     }
 }
-package Controller.UserMenu;
+package Controllers.UserMenu;
 
-import Controller.InputFromKeyboard.InputData;
+import Controllers.InputFromKeyboard.InputData;
 
 public class ControlUserMenu {
 
-    public static boolean SelectOption(int option) {
+    public static boolean SelectOption(int option , String IDUSer) {
         int UserInput = InputData.InputUserChoose(option);
 
         switch (UserInput) {
             case 1: 
-                OrderManager.MakeOrder();
+                OrderManager.MakeOrder(IDUSer);
                 break;
             case 2: 
-                OrderManager.YourOrder();
+                OrderManager.YourOrder(IDUSer);
                 break;
             case 3: // Your Information
-
+                
                 break;
             case 4: // Logout
                 return false;
@@ -591,7 +636,7 @@ public class ControlUserMenu {
     }
 
 }
-package Model.AccessDatabase;
+package Models.AccessDatabase;
 
 import java.io.FileWriter;
 import java.nio.file.Path;
@@ -600,7 +645,7 @@ import java.util.Scanner;
 
 public class AccessData {
 
-    public static ArrayList<String> getData(final String PathFile) {
+    private static ArrayList<String> getData(final String PathFile) {
         ArrayList<String> ListAccount = null;
         try (Scanner scFile = new Scanner(Path.of(PathFile))) {
             ListAccount = new ArrayList<>();
@@ -610,7 +655,6 @@ public class AccessData {
         } catch (final Exception e) {
             System.out.println(e.toString());
         }
-
         return ListAccount;
     }
 
@@ -628,7 +672,6 @@ public class AccessData {
         DataProcessing.UsersAccount.clear();
         DataProcessing.UsersAccount.addAll(getData(PathFile.PathUsersAccounts));
     }
-
     public static void setUserAccountToDatabase() {
         setData(DataProcessing.UsersAccount, PathFile.PathUsersAccounts);
     }
@@ -687,8 +730,26 @@ public class AccessData {
         setData(DataProcessing.AdminInformation, PathFile.PathAdminsInformation);
     }
 
+    public static void getAllOrder(){
+        DataProcessing.AllOrder.clear();
+        DataProcessing.AllOrder.addAll(getData(PathFile.PathOrder));
+    }
+
+    public static void setAllOrderToDatabase(){
+        setData(DataProcessing.AllOrder, PathFile.PathOrder);
+    }
+
+    public static void getAllItem(){
+        DataProcessing.AllItem.clear();
+        DataProcessing.AllItem.addAll(getData(PathFile.PathItem));
+    }
+
+    public static void setAllItem(){
+        setData(DataProcessing.AllItem, PathFile.PathItem);
+    }
+
 }
-package Model.AccessDatabase;
+package Models.AccessDatabase;
 
 import java.util.ArrayList;
 
@@ -697,13 +758,8 @@ public interface DataProcessing {
     ArrayList<String> AdminsAccounts = new ArrayList<>();
     ArrayList<String> AdminInformation = new ArrayList<>();
 
-    // Goods
-    ArrayList<String> IDOfGoods = new ArrayList<>();
-
-    ArrayList<String> OrdersBeingTransported = new ArrayList<>();
-    ArrayList<String> OrdersDeliveryHistory = new ArrayList<>();
-    ArrayList<String> OrdersForm = new ArrayList<>();
-    ArrayList<String> OrdersPreparingToDelivery = new ArrayList<>();
+    // Warehouse
+    ArrayList<String> AllItem = new ArrayList<>();
 
     // Personnel
     ArrayList<String> PersonnelAccounts = new ArrayList<>();
@@ -712,37 +768,517 @@ public interface DataProcessing {
     // Users
     ArrayList<String> UsersAccount = new ArrayList<>();
     ArrayList<String> UserInformation = new ArrayList<>();
+    ArrayList<String> AllOrder = new ArrayList<>();
 
     //
     ArrayList<String> AllAccountsID = new ArrayList<>();
 }
-package Model.AccessDatabase;
+package Models.AccessDatabase;
 
 public interface PathFile {
     // Admin
-    public final String PathAdminsAccounts = "Database\\Admins\\Accounts.txt";
-    public final String PathAdminsInformation = "Database\\Admins\\Information.txt";
-
-    // Goods
-    public final String PathListIDOfGoods = "Database\\Goods\\List Of Goods\\ListIDOfGoods.txt";
-
-    public final String PathOrderBeingTransported = "Database\\Goods\\Orders\\BeingTransported.txt";
-    public final String PathDeliveryHistory = "Database\\Goods\\Orders\\ListOrders.txt";
-    public final String PathOrderForm = "Database\\Goods\\Orders\\OrderForm.txt";
-    public final String PathPreparingToDelivery = "Database\\Goods\\Orders\\PreparingToDelivery.txt";
+    String PathAdminsAccounts = "Database\\Admins\\Accounts.txt";
+    String PathAdminsInformation = "Database\\Admins\\Information.txt";
 
     // Personnel
-    public final String PathPersonnelAccounts = "Database\\Personnel\\Accounts.txt";    
-    public final String PathPersonnelInformation = "Database\\Personnel\\Information.txt";
+    String PathPersonnelAccounts = "Database\\Personnel\\Accounts.txt";
+    String PathPersonnelInformation = "Database\\Personnel\\Information.txt";
 
     // Users
-    public final String PathUsersAccounts = "Database\\Users\\Accounts.txt";
-    public final String PathUsersInformation = "Database\\Users\\Information.txt";
+    String PathUsersAccounts = "Database\\Users\\Accounts.txt";
+    String PathUsersInformation = "Database\\Users\\Information.txt";
+    String PathOrder = "Database\\Users\\Order.txt";
+
+    //Warehouse
+    String PathItem = "Database\\Warehouse\\Item.txt";
 
     //
-    public final String PathAllAccountsID = "Database\\AllAccountsID.txt";
+    String PathAllAccountsID = "Database\\AllAccountsID.txt";
 }
-package Model.Accounts;
+package Models.Accounts;
 
-import Controller.InputFromKeyboard.InputData;
-import Model.AccessD
+import Controllers.InputFromKeyboard.InputData;
+import Models.AccessDatabase.AccessData;
+import Models.AccessDatabase.DataProcessing;
+import Views.ProgramLogException;
+
+public class Accounts {
+    private String ID;
+    private String Username;
+    private String Password;
+    private String SecurityQuestion;
+    private String SecurityAnswer;
+
+    public Accounts() {
+        setID();
+        setUsername();
+        setPassword();
+        setSecurityQuestion();
+        setSecurityAnswer();
+    }
+
+    public Accounts(String newAccount){
+        setID(newAccount);
+        setUsername(newAccount);
+        setPassword(newAccount);
+        setSecurityQuestion(newAccount);
+        setSecurityAnswer(newAccount);            
+    }    
+
+    public String getID() {
+        return ID;
+    }
+
+    public String getUsername() {
+        return Username;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public String getSecurityQuestion() {
+        return SecurityQuestion;
+    }
+
+    public String getSecurityAnswer() {
+        return SecurityAnswer;
+    }
+
+    public void setID() {
+        AccessData.getAccountID();
+        if (DataProcessing.AllAccountsID.isEmpty()) {
+            this.ID = "0";
+        } else {
+            String lastID = DataProcessing.AllAccountsID.get(DataProcessing.AllAccountsID.size() - 1);
+            this.ID = String.valueOf(Integer.parseInt(lastID)+ 1);
+        }
+
+        DataProcessing.AllAccountsID.add(ID);
+        AccessData.setAccountIDToDatabase();
+    }
+
+    public void setID(String newAccount){
+        this.ID = InputData.CutStringFrom(newAccount, 1);
+    }
+
+    public void setUsername() {        
+        String Username = InputData.InputUserName();
+        if(InputData.CheckUserNameIsOnly(Username)){
+            this.Username = Username;
+        } else {
+            System.out.println(ProgramLogException.eUserNameDelicate);
+            setUsername();
+        }
+    }
+
+    public void setUsername(String newAccount){
+        this.Username = InputData.CutStringFrom(newAccount, 2);
+    }
+
+    public void setPassword() {
+        Password = InputData.InputPassword();
+    }
+
+    public void setPassword(String newAccount){
+
+        this.Password = InputData.CutStringFrom(newAccount, 3);
+    }
+
+    public void setSecurityQuestion() {
+        
+        this.SecurityQuestion = InputData.InputSecurityQuestion();
+    }
+
+    public void setSecurityQuestion(String newAccount){
+        this.SecurityQuestion = InputData.CutStringFrom(newAccount, 4);
+    }
+
+    public void setSecurityAnswer() {
+        this.SecurityAnswer = InputData.InputSecurityAnswer();
+    }
+
+    public void setSecurityAnswer(String newAccount){
+        this.SecurityAnswer = InputData.CutStringFrom(newAccount, 5);
+    }
+
+    public String toString() {
+        return "|" + getID() + "|" + getUsername() + "|" + getPassword() + "|" + getSecurityQuestion() + "|"
+                + getSecurityAnswer() + "|";
+    }
+
+}
+package Models.Accounts;
+
+public class AdminAccount extends Accounts {
+
+    public AdminAccount() {
+        super();
+    }
+    public AdminAccount(String newAccount){
+        super(newAccount);
+    }
+}
+package Models.Accounts;
+
+public class PersonnelAccount extends Accounts {
+
+    private boolean AccountActivated = false;
+
+    public PersonnelAccount() {
+        super();
+    }
+
+    public PersonnelAccount(String newAccount){
+        super(newAccount);
+    }
+
+    public void setAccountActivated(){
+        AccountActivated = true;
+    }
+
+    public boolean getAccountActivated(){
+        return AccountActivated;
+    }
+
+    @Override
+    public String toString(){
+        return super.toString() + AccountActivated + "|";
+    }
+}
+package Models.Accounts;
+
+public class UserAccount extends Accounts {
+
+    public UserAccount() {
+        super();
+    }
+
+    public UserAccount(String newAccount){
+        super(newAccount);
+    }
+}
+package Models.Information;
+
+public class AdminInformation extends Information {
+    
+    public AdminInformation(int ID){
+        super(ID);
+    }
+
+    public AdminInformation(String info){
+        super(info);
+    }
+}
+package Models.Information;
+
+import Controllers.InputFromKeyboard.InputData;
+
+public class Information {
+
+    private String ID;
+    private String Name;
+    private String Age;
+    private String Address;
+
+    public Information(int ID){
+        setID(ID);
+        setName();
+        setAge();
+        setAddress();
+    }
+
+    public Information(String info){
+        setName(info);
+        setAge(info);
+        setAddress(info);
+    }
+
+    public void setID(int ID){
+        this.ID = String.valueOf(ID);
+    }
+
+    public void setName() {
+        Name = InputData.InputInfoName();
+    }
+    public void setAge() {
+        Age = InputData.InputInfoAge();
+    }    
+    public void setAddress() {
+        Address = InputData.InputInfoAddress();
+    }
+
+    public void setID(String info) {
+        ID = InputData.CutStringFrom(info, 1);
+    }
+
+    public void setName(String info){
+        this.Name = InputData.CutStringFrom(info, 2);
+    }
+    public void setAge(String info){
+        this.Age = InputData.CutStringFrom(info, 3);
+    }
+    public void setAddress(String info){
+        this.Address = InputData.CutStringFrom(info, 4);
+    }
+
+    public String getID(){
+        return ID;
+    }
+
+    public String getName() {
+        return Name;
+    }
+    public String getAge() {
+        return Age;
+    }
+    public String getAddress() {
+        return Address;
+    }
+
+    public String toString(){
+        return "|" + getID() + "|" + getName() + "|" + getAge() + "|" + getAddress() + "|";
+    }
+
+}
+package Models.Information;
+
+public class PersonnelInformation extends Information {
+    
+    public PersonnelInformation(int ID){
+        super(ID);
+    }
+
+    public PersonnelInformation(String info){
+        super(info);
+    }
+}
+package Models.Information;
+
+
+public class UserInformation extends Information{
+    
+    public UserInformation(int ID){
+        super(ID);
+    }
+    
+    public UserInformation(String info){
+        super(info);
+    }
+}
+package Views.Admins;
+
+import Controllers.AdminMenu.ControlAdminMenu;
+
+public class AdminMenu {
+
+    public static void Menu() {
+
+        do {
+           System.out.println("\n***************** Welcome to Mei Store *****************");
+           System.out.println("** (1) Goods Manager                                    **");
+           System.out.println("** (2) Personnel Manager                                **");
+           System.out.println("** (3) Your Information                                 **");
+           System.out.println("** (4) Logout                                           **");
+       } while (ControlAdminMenu.SelectOption(4));
+
+    }
+}
+package Views.Admins;
+
+import Controllers.AdminMenu.ControlGoodManager;
+
+public class GoodsManagerMenu {
+    public static void Menu() {
+
+        do{
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+        } while(ControlGoodManager.SelectOption(5));
+    }
+}
+package Views.Admins;
+
+import Controllers.AdminMenu.ControlPersonnelManager;
+
+public class PersonnelManagementMenu {
+    public static void Menu(){
+        // Accept Personnel Account
+        // Time for word
+        // Remove Personnel Account
+        do {
+            System.out.println();
+            System.out.println();
+            System.out.println();
+        } while(ControlPersonnelManager.SelectOption(3));
+    }
+}
+package Views.Main;
+
+import Controllers.MainMenu.Login;
+
+public class LoginMenu {
+    public static void Menu() {
+        System.out.println("***************** Welcome to Mei Store *****************");
+        System.out.println("** You can login with your UserName and your Password **");
+        System.out.println("**                                                    **");
+
+        Login.LoginForm();
+    }
+}
+package Views.Main;
+
+import Controllers.MainMenu.ControlMainMenu;
+
+public class MainMenu {
+    public static void main(String[] args) {
+
+        do{
+            System.out.println("***************** Welcome to Mei Store *****************");
+            System.out.println("** Mei Store is clothing store.You can order it here  **");
+            System.out.println("** How to use?                                        **");
+            System.out.println("**   Input a number sentence beginning your choose    **");
+            System.out.println("**   - - - - - - - - - - - - - - - - - - - - - - - -  **");
+            System.out.println("**  (1) Login                                         **");
+            System.out.println("**  (2) Sign up                                       **");
+            System.out.println("**  (3) Forgot your password ?                        **");
+            System.out.println("**  (4) Exit                                          **");
+        } while (ControlMainMenu.SelectOption(4));
+
+    }
+}
+package Views.Main;
+
+import Controllers.MainMenu.SignUp;
+
+public class SignUpMenu {
+    public static void Menu() {
+        System.out.println("***************** Welcome to Mei Store *****************");
+        System.out.println("** What account do you want to create ?               **");
+        System.out.println("** (1) Users Account                                  **");
+        System.out.println("** (2) Personnel Account                              **");
+        System.out.println("** (3) Admin Account                                  **");
+        System.out.println("** (4) Back                                           **");
+
+        SignUp.ControlSignUp(4);
+    }
+}
+package Views.Personnel;
+
+import Controllers.PersonnelMenu.ControlOrderManager;
+
+public class OrderManagerMenu {
+    public static void Menu(){
+        do{
+            System.out.println();
+            System.out.println();
+            System.out.println();
+        } while(ControlOrderManager.SelectOption(3));
+    }
+
+}
+package Views.Personnel;
+
+import Controllers.PersonnelMenu.ControlPersonnelMenu;
+
+public class PersonnelMenu {
+
+    public static void Menu() {
+
+        do {
+            System.out.println("***************** Welcome to Mei Store *****************");
+            System.out.println("** (1) Check Order                                    **");
+            System.out.println("** (2) Check Goods                                    **");
+            System.out.println("** (3) Your Information                               **");
+            System.out.println("** (4) Logout                                         **");
+        } while (ControlPersonnelMenu.SelectOption(4));
+
+    }
+
+}
+package Views.Users;
+
+import Controllers.UserMenu.ControlUserMenu;
+
+public class UserMenu {
+
+    public static void Menu(String IDUser) {
+
+        do {
+            System.out.println("***************** Welcome to Mei Store *****************");
+            System.out.println("** (1) Order                                          **");
+            System.out.println("** (2) Your Order                                     **");
+            System.out.println("** (3) Your Information                               **");
+            System.out.println("** (4) Logout                                         **");
+        } while (ControlUserMenu.SelectOption(4 , IDUser));
+
+    }
+}
+package Views;
+
+public interface ProgramLog {
+    String inputChooseNotify = "Number of your choose: ";
+
+    String inputUserName = "Phone Number: ";
+    String inputPassword = "Password: ";
+
+    String SecurityQuestion = "\nSecurity Question help you reset account password!";
+    String SecurityQuestion1 = "The name of your high school?";
+    String SecurityQuestion2 = "The flower you like best?";
+    String SecurityQuestion3 = "Animals you like best?";
+
+    String inputSecurityAnswer = "Your answer: ";
+
+    String inputAdminCode = "\nAdmin code is 4 number ****. You need to confirm to create admin account.\nAdmin code: ";
+
+    String LoginNotSuccess = "\nUsername or password incorrect!";    
+
+    String ContinueOrExitMenu = "Do you want continue? \n (1) Yes \n (2) Exit";
+    
+    String CreateAccountSuccess = "\nCreate account success! Import your information.";
+    String CreatePersonnelAccountSuccess = "\nCreate account success! Please wait for admin accept.";
+
+    String inputInfoName = "Name: ";
+    String inputInfoAge = "Age: ";
+    String inputInfoAddress = "Address: ";
+
+    String inputIDItem = "ID Item : ";
+    String inputNameItem = "Name Item: ";
+    String inputAmountItem = "Amount Item: ";
+    String inputPriceItem = "Item Price: ";
+
+    String BuyItemSuccess = "Buy item success!";
+}
+package Views;
+
+public interface ProgramLogException {
+    String eUserChooseNotNumber = "Please enter only one digit !";
+    String eUserChooseLength = "Please enter number at the beginning of the choose!";
+
+    String eLengthMobilNumber = "Your phone number not enough 10 number! Please import again";
+    String eUserNameIsNumber = "Your username not a mobile phone number! Please import again";        
+    String eUserNameDelicate = "Your username is available! Please import again";
+    String ePasswordLength = "Your password length less 12 and bigger 6";
+    String eAccountNotActivated = "Your account not activated!";
+    String ePasswordIsNumberAndLetter = "Your password is only number and letter! Please import again";
+    String eStringAllNotLetter = "Your input must be string with all is letter. Please import again!";
+    String eAdminCode = "Admin code is all number! Please import again.";    
+    String eAdminCodeIncorrect = "Admin code incorrect!";    
+    String eInputInfoName = "Please enter your real name!";
+    String eInputInfoAge = "Please enter your real age!";
+    String eInputInfoAddress = "Please enter your real address!";
+
+    String eAnswerNotCorrect = "The answer is not correct!";
+    String eAccountNotFound = "Username not found!";
+
+    String eIDItemNotFound = "The ID Item not found!";    
+    String eNameItemNotCorrect = "The name of item is string and number! Please import again.";
+    String eAmountItemNotCorrect = "The amount of item is only number! Please import again.";
+    String ePriceItemNotCorrect = "The item price is only number! Please import again.";        
+    String eAmountItemTooMuch = "You buy too much.Please reduce the amount!";
+
+    String eBuyItemNotSuccess = "Buy item not Success!";
+}
