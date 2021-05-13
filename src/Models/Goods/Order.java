@@ -44,7 +44,7 @@ public class Order {
             ItemUserBuy newItem = new ItemUserBuy();
             if(newItem.getStatus()){
                 order.add(newItem.toString());
-                Status = "Delivering";
+                Status = "Preparing goods";
                 System.out.println(ProgramLog.BuyItemSuccess);
             } else {
                 System.out.println(ProgramLogException.eBuyItemNotSuccess);

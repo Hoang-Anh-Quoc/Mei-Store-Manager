@@ -10,17 +10,17 @@ public class ControlAdminMenu {
         int UserInput = InputData.InputUserChoose(option);
 
         switch (UserInput) {
-            case 1: 
-                GoodsManagerMenu.Menu();
-                break;
-            case 2: 
-                PersonnelManagementMenu.Menu();
-                break;
-            case 3: // Your information
+        case 1:
+            GoodsManagerMenu.Menu();
+            break;
+        case 2:
+            PersonnelManagementMenu.Menu();
+            break;
+        case 3: // Your information
 
-                break;
-            case 4:
-                return false;
+            break;
+        case 4:
+            return false;
         }
         return true;
     }

@@ -27,15 +27,12 @@ public class OrderManager {
     }
 
     public static void YourOrder(String IDUser){
-       
         AccessData.getAllOrder();
-
         for(String orderInList : DataProcessing.AllOrder){
             Order OrderInDatabase = new Order(orderInList);
             if(IDUser.equals(OrderInDatabase.getIDUser())){
                 OrderInDatabase.printOrder();
             }
         }
-
     }
 }

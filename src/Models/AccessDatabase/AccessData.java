@@ -8,16 +8,16 @@ import java.util.Scanner;
 public class AccessData {
 
     private static ArrayList<String> getData(final String PathFile) {
-        ArrayList<String> ListAccount = null;
+        ArrayList<String> ListOfData = null;
         try (Scanner scFile = new Scanner(Path.of(PathFile))) {
-            ListAccount = new ArrayList<>();
+            ListOfData = new ArrayList<>();
             while (scFile.hasNextLine()) {
-                ListAccount.add(scFile.nextLine());
+                ListOfData.add(scFile.nextLine());
             }
         } catch (final Exception e) {
             System.out.println(e.toString());
         }
-        return ListAccount;
+        return ListOfData;
     }
 
     private static void setData(final ArrayList<String> listData, final String PathFile) {

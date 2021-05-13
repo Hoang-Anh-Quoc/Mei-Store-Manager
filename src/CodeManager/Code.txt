@@ -25,6 +25,94 @@ public class ControlAdminMenu {
         return true;
     }
 }
+package Controllers.AdminMenu;
+
+import Controllers.InputFromKeyboard.InputData;
+
+public class ControlGoodManager {
+
+    public static boolean SelectOption(int option) {
+        int UserInput = InputData.InputUserChoose(option);
+        switch (UserInput) {
+            case 1: // print list item
+                GoodManager.PrintListGood();
+                return true;
+            case 2: // add item
+                GoodManager.AddGood();
+                return true;
+            case 3: // remove item
+                GoodManager.RemoveGood();
+                return true;
+            case 4: // edit item
+                GoodManager.EditGood();
+                return true;
+            case 5: // back
+                break;
+        }
+
+        return false;
+    }
+
+}
+package Controllers.AdminMenu;
+
+import Controllers.InputFromKeyboard.InputData;
+
+
+public class ControlPersonnelManager {
+    
+    public static boolean SelectOption(int option) {
+        int UserInput = InputData.InputUserChoose(option);
+        switch (UserInput) {
+            case 1: 
+                PersonnelManager.AcceptPersonnelAccount();                
+                return true;
+            case 2: 
+                PersonnelManager.StatisticsWorkingTime();
+                return true;
+            case 3:
+                PersonnelManager.RemovePersonnelAccount();
+                return true;
+            case 4: // Back
+                break;
+        }
+        return false;
+    }
+}
+package Controllers.AdminMenu;
+
+import Controllers.PersonnelMenu.CheckGood;
+
+public class GoodManager {
+        
+    public static void PrintListGood(){
+        CheckGood.PrintListGood();
+    }
+    public static void AddGood(){
+
+    }
+    public static void RemoveGood(){
+
+    }
+    public static void EditGood(){
+        
+    }
+}
+package Controllers.AdminMenu;
+
+public class PersonnelManager {
+    public static void AcceptPersonnelAccount(){
+
+    }
+    // Thống kê thời gian làm việc
+    public static void StatisticsWorkingTime(){
+
+    }
+    public static void RemovePersonnelAccount(){
+        
+    }
+
+}
 package Controllers.InputFromKeyboard;
 
 import Models.AccessDatabase.AccessData;
@@ -44,12 +132,12 @@ public class InputData implements LibraryInputData, ProgramLogException, Program
                 return InputUserChoose(NumberOfOptions);
             }
 
-            System.out.println("");
+            System.out.println();
             return numberOfChoose;
         } catch (NumberFormatException e) {
             System.out.println(eUserChooseNotNumber);
         }
-        System.out.println("");
+        System.out.println();
         return InputUserChoose(NumberOfOptions);
     }
 
@@ -232,7 +320,7 @@ public class InputData implements LibraryInputData, ProgramLogException, Program
     }
 
     public static boolean CheckStringAllIsNumber(String StringNeedCheck) {
-        String StringForm = "0123456789";
+        final String StringForm = "0123456789";
         for (int i = 0; i < StringNeedCheck.length(); ++i) {
             if (!StringForm.contains(String.valueOf(StringNeedCheck.charAt(i)))) {
                 return false;
@@ -242,7 +330,7 @@ public class InputData implements LibraryInputData, ProgramLogException, Program
     }
 
     public static boolean CheckStringIsNumberAndLetter(String StringNeedCheck) {
-        String StringForm = "qwertyuioplkjhgfdsazxcvbnm0123456789QWERTYUIOPLKJHGFDSAZXCVBNM";
+        final String StringForm = "qwertyuioplkjhgfdsazxcvbnm0123456789QWERTYUIOPLKJHGFDSAZXCVBNM";
         for (int i = 0; i < StringNeedCheck.length(); ++i) {
             if (!StringForm.contains(String.valueOf(StringNeedCheck.charAt(i)))) {
                 return false;
@@ -276,14 +364,11 @@ public class InputData implements LibraryInputData, ProgramLogException, Program
 
     public static String CutStringFrom(String StringNeedCut, int Start) {
         // Datatype is "|...|...|" so start is number of "|"
-        int count = 0;
-        while (count != Start) {
+        for(int i = 0; i < Start ; ++i){
             StringNeedCut = StringNeedCut.substring(StringNeedCut.indexOf("|") + 1);
-            ++count;
         }
         return StringNeedCut.substring(0, StringNeedCut.indexOf("|"));
     }
-
 
 }
 package Controllers.InputFromKeyboard;
@@ -356,7 +441,7 @@ public class ForgotPassword {
             }
         }
         return false;
-    }
+    } 
 
     private static boolean setPasswordForPersonnelAccount(String UserName){
         AccessData.getPersonnelAccount();
@@ -587,6 +672,36 @@ public class SignUp {
 }
 package Controllers.PersonnelMenu;
 
+public class CheckGood {
+    
+    // In ra danh sach hang va so luong cua chung
+    public static void PrintListGood(){
+
+    }
+}
+package Controllers.PersonnelMenu;
+
+import Controllers.InputFromKeyboard.InputData;
+
+public class ControlOrderManager {
+    public static boolean SelectOption(int option) {
+
+        int UserInput = InputData.InputUserChoose(option);
+
+        switch (UserInput) {
+            case 1:
+                
+                return true;
+            case 2:
+                return true;
+            case 3:
+                break;
+        }
+        return false;
+    }
+}
+package Controllers.PersonnelMenu;
+
 import Controllers.InputFromKeyboard.InputData;
 
 public class ControlPersonnelMenu {
@@ -608,6 +723,17 @@ public class ControlPersonnelMenu {
                 return false;
         }
         return true;
+    }
+}
+package Controllers.PersonnelMenu;
+
+public class OrderManager {
+    public static void PrintListOrder(){
+        // in ra ID don hang,ID nguoi nhan, cac loai hang va noi nhan
+    }
+    
+    public static void UpdateOrderStatus(){
+        
     }
 }
 package Controllers.UserMenu;
@@ -636,6 +762,44 @@ public class ControlUserMenu {
     }
 
 }
+package Controllers.UserMenu;
+
+import Models.AccessDatabase.AccessData;
+import Models.AccessDatabase.DataProcessing;
+import Models.Goods.Item;
+import Models.Goods.Order;
+
+
+public class OrderManager {
+
+    private static void printAllItem(){
+        AccessData.getAllItem();
+        System.out.printf("%1$-8s%2$-15s%3$-13s%4$-10s\n","ID","Name","Amount","Price");
+        for(String stringItem : DataProcessing.AllItem){
+            Item item = new Item(stringItem);
+            item.printItemForUser();
+        }
+    }
+
+    public static void MakeOrder(String IDUser) {
+        printAllItem();
+        Order newOrder = new Order(Integer.parseInt(IDUser));
+        if(newOrder.CheckOrderSuccess()) {
+            DataProcessing.AllOrder.add(newOrder.toString());
+            AccessData.setAllOrderToDatabase();
+        }
+    }
+
+    public static void YourOrder(String IDUser){
+        AccessData.getAllOrder();
+        for(String orderInList : DataProcessing.AllOrder){
+            Order OrderInDatabase = new Order(orderInList);
+            if(IDUser.equals(OrderInDatabase.getIDUser())){
+                OrderInDatabase.printOrder();
+            }
+        }
+    }
+}
 package Models.AccessDatabase;
 
 import java.io.FileWriter;
@@ -646,16 +810,16 @@ import java.util.Scanner;
 public class AccessData {
 
     private static ArrayList<String> getData(final String PathFile) {
-        ArrayList<String> ListAccount = null;
+        ArrayList<String> ListOfData = null;
         try (Scanner scFile = new Scanner(Path.of(PathFile))) {
-            ListAccount = new ArrayList<>();
+            ListOfData = new ArrayList<>();
             while (scFile.hasNextLine()) {
-                ListAccount.add(scFile.nextLine());
+                ListOfData.add(scFile.nextLine());
             }
         } catch (final Exception e) {
             System.out.println(e.toString());
         }
-        return ListAccount;
+        return ListOfData;
     }
 
     private static void setData(final ArrayList<String> listData, final String PathFile) {
@@ -956,6 +1120,305 @@ public class UserAccount extends Accounts {
 
     public UserAccount(String newAccount){
         super(newAccount);
+    }
+}
+package Models.Goods;
+
+import Controllers.InputFromKeyboard.InputData;
+import Models.AccessDatabase.AccessData;
+import Models.AccessDatabase.DataProcessing;
+
+public class Item {
+
+    private String ID;
+    private String Name;
+    private String Amount;
+    private String Price;
+
+    public Item(){
+        setID();
+        setName();
+        setAmount();
+        setPrice();
+    }
+
+    public Item(String item){
+        setID(item);
+        setName(item);
+        setAmount(item);
+        setPrice(item);
+    }
+
+    public void setID() {
+        AccessData.getAllItem();
+        String lastItem = DataProcessing.AllItem.get(DataProcessing.AllItem.size() - 1);
+        int lastID = Integer.parseInt(InputData.CutStringFrom(lastItem,1));
+        this.ID = String.valueOf(lastID + 1);
+    }
+
+    private void setID(String item){
+        this.ID = InputData.CutStringFrom(item,1);
+    }
+
+    private void setName() {
+        this.Name = InputData.InputNameItem();
+    }
+
+    private void setName(String item) {
+        this.Name = InputData.CutStringFrom(item,2);
+    }
+
+    private void setAmount() {
+        this.Amount = InputData.InputAmountItem();
+    }
+
+    private void setAmount(String item) {
+        this.Amount = InputData.CutStringFrom(item,3);
+    }
+
+    public void setAmount(int amount){
+        this.Amount = String.valueOf(amount);
+    }
+
+    private void setPrice() {
+        this.Price = InputData.InputPriceItem();
+    }
+
+    private void setPrice(String item) {
+        this.Price = InputData.CutStringFrom(item,4);
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public String getAmount() {
+        return Amount;
+    }
+
+    public String getPrice() {
+        return Price;
+    }
+
+    public String toString(){
+        return "|" + getID() +"|" + getName() + "|" + getAmount() + "|" + getPrice() + "|";
+    }
+
+    public void printItemForUser() {
+        //"%1$-8s%2$-15s%3$-13s%4$-20s\n" - This is format line when print
+        if(Integer.parseInt(getAmount()) > 0){
+            System.out.printf("%1$-8s%2$-15s%3$-13s%4$-20s\n",getID(),getName(),"Stoking",getPrice());
+        } else {
+            System.out.printf("%1s%12s%12s%12s\n",getID(),getName(),"Out of stock",getPrice());
+        }
+    }
+
+    public void printItemForManager(){
+        System.out.printf("%1s%12s%12s%12s\n",getID(),getName(),getAmount(),getPrice());
+    }
+
+}
+package Models.Goods;
+
+import Controllers.InputFromKeyboard.InputData;
+import Models.AccessDatabase.AccessData;
+import Models.AccessDatabase.DataProcessing;
+import Views.ProgramLogException;
+
+public class ItemUserBuy {
+    
+    private String IDItem;
+    private String NameItem;
+    private String AmountItem;
+    private boolean Status = true;
+
+    public ItemUserBuy() {
+        setIDItem();
+        setNameItem(SearchItemWithID(this.IDItem));
+        setAmountItem(SearchItemWithID(this.IDItem));
+    }
+
+    public ItemUserBuy(String item){
+        setNameItem(item);
+        setAmountItem(item);
+    }
+
+    public Item SearchItemWithID(String IDItem){
+        for(String StringItem : DataProcessing.AllItem){
+            Item item = new Item(StringItem);
+            if(item.getID().equals(IDItem)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public void setIDItem() {
+        String id = InputData.InputIDItemForUser();
+        this.IDItem = SearchItemWithID(id).getID();
+        if(this.IDItem == null) {
+            System.out.println(ProgramLogException.eIDItemNotFound);
+            Status = false;
+        }
+    }
+
+    public void setNameItem(Item item) {
+        this.NameItem = item.getName();
+    }
+
+    public void setNameItem(String item){
+        this.NameItem = InputData.CutStringFrom(item,1);
+    }
+
+    public void setAmountItem(Item item) {        
+        String amountItem = InputData.InputAmountItem();
+        
+        if(Integer.parseInt(amountItem) <= Integer.parseInt(item.getAmount())) {
+            this.AmountItem = amountItem;
+            upDateAmountItem(item , amountItem);
+        } else {
+            System.out.println(ProgramLogException.eAmountItemTooMuch);            
+            Status = false;
+        }
+    }
+    public void setAmountItem(String item){
+        this.AmountItem = InputData.CutStringFrom(item,2);
+    }
+
+    public void upDateAmountItem(Item item , String amountItem){
+        DataProcessing.AllItem.remove(item.toString());
+        item.setAmount(Integer.parseInt(item.getAmount()) - Integer.parseInt(amountItem));
+        DataProcessing.AllItem.add(item.toString());            
+        AccessData.setAllItem();
+    }
+
+//    public String getIDItem() {
+//        return IDItem;
+//    }
+
+    public String getNameItem() {
+        return NameItem;
+    }
+    public String getAmountItem() {
+        return AmountItem;
+    }
+    public Boolean getStatus(){
+        return Status;
+    }
+
+    public String toString(){
+        return getNameItem() + "|" + getAmountItem() + "|";
+    }
+
+    public void printItemUserBuy() {
+//        System.out.printf("%1s%12s\n",getNameItem(),getAmountItem());
+        System.out.println(getNameItem() + "   " + getAmountItem());
+    }
+}
+package Models.Goods;
+
+import Controllers.InputFromKeyboard.InputData;
+import Models.AccessDatabase.AccessData;
+import Models.AccessDatabase.DataProcessing;
+import Views.ProgramLog;
+import Views.ProgramLogException;
+
+import java.util.ArrayList;
+
+public class Order {
+    
+    private String IDOrder;
+    private String IDUser;
+    private String Status = "";
+    private final ArrayList<String> order = new ArrayList<>();
+
+    public Order(int IDUser){        
+        setIDOrder();
+        setItemToOrder();
+        setIDUser(IDUser);
+    }
+
+    public Order(String order){
+        setIDOrder(order);
+        setItemToOrder(order);
+        setIDUser(order);
+    }
+
+    public void setIDUser(int IDUser){
+        this.IDUser = String.valueOf(IDUser);
+    }
+
+    public void setIDUser(String order){
+        this.IDUser =  InputData.CutStringFrom(order,2);
+    }
+
+    public String getIDUser(){
+        return this.IDUser;
+    }
+
+    public void setItemToOrder(){
+        do {
+            ItemUserBuy newItem = new ItemUserBuy();
+            if(newItem.getStatus()){
+                order.add(newItem.toString());
+                Status = "Preparing goods";
+                System.out.println(ProgramLog.BuyItemSuccess);
+            } else {
+                System.out.println(ProgramLogException.eBuyItemNotSuccess);
+                Status = "False";
+            }
+        } while(InputData.ContinueOrExit());   
+    }
+
+    public void setItemToOrder(String order){
+        int AmountOfItem = 0;
+        for(int i = 0 ; i < order.length() -1 ; ++i){
+            if(order.startsWith("|", i)){
+                ++AmountOfItem;
+            }
+        }
+
+        for(int i = 3 ; i < AmountOfItem ; ++i) {
+            this.order.add("|" + InputData.CutStringFrom(order,i) + "|" + InputData.CutStringFrom(order, i + 1) + "|");
+        }
+    }
+
+    public void setIDOrder() {
+        AccessData.getAllOrder();
+        String lastOrder = DataProcessing.AllOrder.get(DataProcessing.AllOrder.size() - 1);
+        int lastID = Integer.parseInt(InputData.CutStringFrom(lastOrder,1));
+        this.IDOrder = String.valueOf(lastID + 1);
+    }
+
+    public void setIDOrder(String order){
+        this.IDOrder = InputData.CutStringFrom(order,1);
+    }
+
+    public String getIDOrder() {
+        return IDOrder;
+    }
+
+    public String toString() {
+        StringBuilder listItem = new StringBuilder();
+        for(String item : order){
+            listItem.append(item);
+        }        
+        return "|" + getIDOrder() + "|" + IDUser + "|" + listItem.toString();
+    }
+
+    public void printOrder(){
+        for(String item : order) {
+            ItemUserBuy ItemInListOrder = new ItemUserBuy(item);
+            ItemInListOrder.printItemUserBuy();
+        }
+    }
+
+    public boolean CheckOrderSuccess(){
+        return !Status.equals("False");
     }
 }
 package Models.Information;

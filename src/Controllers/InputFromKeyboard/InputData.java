@@ -133,47 +133,49 @@ public class InputData implements LibraryInputData, ProgramLogException, Program
         }
     }
 
-
-    public static String InputIDItemForUser(){
+    public static String InputIDItemForUser() {
         System.out.print(inputIDItem);
-        return sc.nextLine();        
+        return sc.nextLine();
     }
 
-    public static String InputNameItem(){
+    public static String InputNameItem() {
         System.out.print(inputNameItem);
         String nameItem = sc.nextLine();
-        if(CheckStringIsNumberAndLetter(nameItem)){
+        if (CheckStringIsNumberAndLetter(nameItem)) {
             return nameItem;
         } else {
             System.out.println(eNameItemNotCorrect);
             return InputNameItem();
         }
     }
-    public static String InputAmountItem(){
+
+    public static String InputAmountItem() {
         System.out.print(inputAmountItem);
         String amountItem = sc.nextLine();
-        if(CheckStringAllIsNumber(amountItem)){
+        if (CheckStringAllIsNumber(amountItem)) {
             return amountItem;
         } else {
             System.out.println(eAmountItemNotCorrect);
             return InputAmountItem();
         }
     }
-    public static String InputPriceItem(){
+
+    public static String InputPriceItem() {
         System.out.print(inputPriceItem);
-        String priceItem = sc.nextLine();
-        if(CheckPriceItem(priceItem)){
+        String priceItem = sc.nextLine();        
+        if (CheckPriceItem(priceItem)) {
             return priceItem;
         } else {
             System.out.println(ePriceItemNotCorrect);
             return InputPriceItem();
         }
     }
-    private static boolean CheckPriceItem(String priceItem){
-        try{
+
+    private static boolean CheckPriceItem(String priceItem) {
+        try {
             Double.parseDouble(priceItem);
             return true;
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
     }
@@ -243,13 +245,12 @@ public class InputData implements LibraryInputData, ProgramLogException, Program
                 return false;
             }
         }
-
         return true;
     }
 
     public static String CutStringFrom(String StringNeedCut, int Start) {
-        // Datatype is "|...|...|" so start is number of "|"
-        for(int i = 0; i < Start ; ++i){
+        // Datatype is "|...|...|" so Start is number of poshghdfhgdjf "|"
+        for (int i = 0; i < Start; ++i) {
             StringNeedCut = StringNeedCut.substring(StringNeedCut.indexOf("|") + 1);
         }
         return StringNeedCut.substring(0, StringNeedCut.indexOf("|"));

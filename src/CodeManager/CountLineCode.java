@@ -13,7 +13,6 @@ public class CountLineCode {
         ArrayList<String> ListPathFileCode = new ArrayList<>();
         while (scPathFileCode.hasNextLine()){
             ListPathFileCode.add(scPathFileCode.nextLine());
-            System.out.println(ListPathFileCode.get(ListPathFileCode.size() - 1));
         }
             
         scPathFileCode.close();
@@ -23,13 +22,19 @@ public class CountLineCode {
         int LineCode = 0;
         for(String FileCode : ListPathFileCode){
             Scanner scFileCode = new Scanner(Paths.get(FileCode));
+            int LineCodeInFile = 0;
             while (scFileCode.hasNextLine()){
                 ++LineCode;
+                ++LineCodeInFile;
                 frCode.write(scFileCode.nextLine() + "\n");
-            }                        
+            }
+            System.out.println(FileCode.substring(FileCode.lastIndexOf("\\") + 1)+ "........... Line: " + LineCodeInFile);
             scFileCode.close();
-        }        
+        }
+
         frCode.close();
+
+        System.out.println("\nFile in Project: " + ListPathFileCode.size());
         System.out.println("Line of code in project: " + LineCode);
     }
 }

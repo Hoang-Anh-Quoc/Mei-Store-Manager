@@ -75,6 +75,7 @@ public class ItemUserBuy {
 //    public String getIDItem() {
 //        return IDItem;
 //    }
+
     public String getNameItem() {
         return NameItem;
     }
@@ -89,7 +90,8 @@ public class ItemUserBuy {
         return getNameItem() + "|" + getAmountItem() + "|";
     }
 
-    public void printItemUserBuy(){
+    public void printItemUserBuy() {
+//        System.out.printf("%1s%12s\n",getNameItem(),getAmountItem());
         System.out.println(getNameItem() + "   " + getAmountItem());
     }
 }
